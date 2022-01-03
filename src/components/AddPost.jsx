@@ -15,7 +15,6 @@ class AddPost extends Component {
     const { title, content } = this.state;
 
     const post = {
-      id: Date.now().toString(),
       title,
       content,
       user: {
@@ -26,7 +25,7 @@ class AddPost extends Component {
       },
       favorites: 0,
       comments: 0,
-      createdAt: new Date(),
+      createdAt: new Date().toString(),
     }
 
     onCreate(post);
