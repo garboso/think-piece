@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import firebase from "firebase/app";
 import 'firebase/firestore';
 
 const firebaseConfig = {
@@ -10,7 +10,6 @@ const firebaseConfig = {
   appId: "1:505504813109:web:f0a9781c83da8709bf617c"
 };
 
-export const firestore = firebase.firestore();
-firestore.settings({ timestampInSnapshots: true });
+const app = firebase.initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
+export const firestore = firebase.firestore();
