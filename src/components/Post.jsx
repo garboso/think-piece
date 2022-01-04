@@ -5,6 +5,9 @@ import { firestore } from '../firebase';
 const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
   const postRef = firestore.doc(`posts/${id}`);
   const remove = () => postRef.delete();
+  const addStar = () => {
+    postRef.set({ stars: stars + 1 }, { merge: true });
+  };
 
   return (
     <article className="Post">
@@ -30,7 +33,7 @@ const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
           <p>{moment(createdAt).calendar()}</p>
         </div>
         <div>
-          <button className="star">Star</button>
+          <button className="star" onClick={addStar}>Star</button>
           <button className="delete" onClick={remove}>Delete</button>
         </div>
       </div>
@@ -39,9 +42,6 @@ const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
 };
 
 Post.defaultProps = {
-  title: 'An Incredibly Hot Take',
-  content:
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus est aut dolorem, dolor voluptatem assumenda possimus officia blanditiis iusto porro eaque non ab autem nihil! Alias repudiandae itaque quo provident.',
   user: {
     id: '123',
     displayName: 'Bill Murray',
